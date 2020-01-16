@@ -1,0 +1,7 @@
+call a
+call b
+return b
+call sda
+return sda
+return a
+return asda

@@ -1,0 +1,356 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in}
+\usepackage{nopageno}
+\pagestyle{empty}
+\usepackage{color}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+\usepackage[none]{hyphenat}
+\usepackage{array}
+\setlength\extrarowheight{3pt} 
+
+% Header, put stuff that impacts the whole document here
+\NeedsTeXFormat{LaTeX2e}
+\title{CSI 3334 Data Structures\\Homework 3}
+
+
+\author{Yufan Xu} 
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle 
+
+
+
+Do your own work for this assignment; do not work with others. Consult the book
+and your professor for help if you need it. Do not use any other resources.  
+Use good grammar, correct spelling, and complete sentences.
+
+
+\begin{enumerate}
+
+
+\item Show the results of inserting 2, 1, 4, 5, 9, 3, 6, and 7 into an initially empty AVL tree. Show the tree after each insertion (before rebalancing), point out each imbalance (when they occur), and show the tree after rebalancing (if it is necessary). 
+
+Solution:
+
+Insert 2
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {2}
+ 
+ Insert 1, 4, 5, 9
+ 
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &2  \ar@{-}[dl] \ar@{-}[drr] \\
+ 						 1 &*\txt{}&*\txt{}&4  \ar@{-}[dr]\\
+						 *\txt{} &*\txt{} &*\txt{} &*\txt{} &5  \ar@{-}[dr]\\
+						  *\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &9}
+						  
+Lost balance, 4 is the $\alpha$ node
+
+Single Left Rotation
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &2  \ar@{-}[dl] \ar@{-}[drr] \\
+ 						 1 &*\txt{}&*\txt{}&5  \ar@{-}[dl]\ar@{-}[drr]\\
+						 *\txt{} &*\txt{} &4\ar@{-}[dl]&*\txt{} &*\txt{} &9\\
+						 *\txt{} &3} 
+						 
+Insert 3
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &2  \ar@{-}[dl] \ar@{-}[drr] \\
+ 						 1 &*\txt{}&*\txt{}&5  \ar@{-}[dl]\ar@{-}[drr]\\
+						 *\txt{} &*\txt{} &4&*\txt{} &*\txt{} &9}  \\
+						 
+Lost balance, 2 is the $\alpha$ node
+
+Right-Left Rotation
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &2  \ar@{-}[dl] \ar@{-}[drr] \\
+ 						 1 &*\txt{}&*\txt{}&4  \ar@{-}[dl]\ar@{-}[dr]\\
+						 *\txt{} &*\txt{} &3 &*\txt{} &5  \ar@{-}[dr]\\
+						  *\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &9}
+						  
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &4  \ar@{-}[dl] \ar@{-}[drrrr]*\txt{} &*\txt{} \\
+ 						   *\txt{} &2 \ar@{-}[dl]\ar@{-}[dr]*\txt{} &*\txt{} &*\txt{}&*\txt{}&*\txt{}&5\ar@{-}[drr]\\
+						   1&*\txt{} &3&*\txt{} &*\txt{} &*\txt{} &*\txt{}&*\txt{}&9}
+						   
+Insert 6
+						  
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &4  \ar@{-}[dl] \ar@{-}[drrrr]*\txt{} &*\txt{} \\
+ 						   *\txt{} &2 \ar@{-}[dl]\ar@{-}[dr]*\txt{} &*\txt{} &*\txt{}&*\txt{}&*\txt{}&5\ar@{-}[drr]\\
+						   1&*\txt{} &3&*\txt{} &*\txt{} &*\txt{} &*\txt{}&*\txt{}&9\ar@{-}[dl]\\
+						   *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&6}
+						   
+Lost balance, 5 is the  $\alpha$ node
+
+Right-Left Rotation
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &4  \ar@{-}[dl] \ar@{-}[drrrr]*\txt{} &*\txt{} \\
+ 						   *\txt{} &2 \ar@{-}[dl]\ar@{-}[dr]*\txt{} &*\txt{} &*\txt{}&*\txt{}&*\txt{}&5\ar@{-}[drr]\\
+						   1&*\txt{} &3&*\txt{} &*\txt{} &*\txt{} &*\txt{}&*\txt{}&6\ar@{-}[dr]\\
+						   *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&9}
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &4  \ar@{-}[dl] \ar@{-}[drrrr]*\txt{} &*\txt{} \\
+ 						   *\txt{} &2 \ar@{-}[dl]\ar@{-}[dr]*\txt{} &*\txt{} &*\txt{}&*\txt{}&*\txt{}&6\ar@{-}[dl]\ar@{-}[drrr]\\
+						   1&*\txt{} &3&*\txt{} &*\txt{}  &5&*\txt{}&*\txt{}&*\txt{}&9}
+						   
+Insert 7
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &4  \ar@{-}[dl] \ar@{-}[drrrr]*\txt{} &*\txt{} \\
+ 						   *\txt{} &2 \ar@{-}[dl]\ar@{-}[dr]*\txt{} &*\txt{} &*\txt{}&*\txt{}&*\txt{}&6\ar@{-}[dl]\ar@{-}[drrr]\\
+						   1&*\txt{} &3&*\txt{} &*\txt{}  &5&*\txt{}&*\txt{}&*\txt{}&9\ar@{-}[dl]\\
+						   *\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &7}
+						   
+The above tree is the final result after all the insertions\\
+						   
+		
+
+\item Show how the following AVL-balanced tree will change after removing each of the following nodes: 17, 13, 20, and 2. After removing each node, it should remain removed for the rest of the exercise. Make sure that your changes are clear. 
+
+\hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} & *\txt{} & *\txt{} & *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &34 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                *\txt{} &*\txt{} & *\txt{} &10  \ar@{-}[dll] \ar@{-}[drrrr] &  *\txt{} &   *\txt{} &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &72 \ar@{-}[dl] \ar@{-}[drr] \\
+                *\txt{} &3  \ar@{-}[dl] \ar@{-}[dr]     &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &20   \ar@{-}[dl] \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} &68   \ar@{-}[dl] \ar@{-}[dr] &  *\txt{} &*\txt{} & 74  \ar@{-}[dl] \ar@{-}[dr] \\
+		2 &  *\txt{} &4 \ar@{-}[dr] & *\txt{} &*\txt{} &*\txt{} &13 \ar@{-}[dl] \ar@{-}[d]& *\txt{} & 22 \ar@{-}[dl]& *\txt{} &55 \ar@{-}[dl] \ar@{-}[d] & *\txt{}&70 \ar@{-}[dl]& 73 & *\txt{} &98\ar@{-}[dl]\\
+		*\txt{} &*\txt{} &*\txt{} &7 &*\txt{} &12 &17 &21 &*\txt{} &41 &67 \ar@{-}[dl]&69 &*\txt{} &*\txt{} &75\\
+		*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &66}
+
+Solution:
+
+Remove 17
+
+\hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} & *\txt{} & *\txt{} & *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &34 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                *\txt{} &*\txt{} & *\txt{} &10  \ar@{-}[dll] \ar@{-}[drrrr] &  *\txt{} &   *\txt{} &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &72 \ar@{-}[dl] \ar@{-}[drr] \\
+                *\txt{} &3  \ar@{-}[dl] \ar@{-}[dr]     &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &20   \ar@{-}[dl] \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} &68   \ar@{-}[dl] \ar@{-}[dr] &  *\txt{} &*\txt{} & 74  \ar@{-}[dl] \ar@{-}[dr] \\
+		2 &  *\txt{} &4 \ar@{-}[dr] & *\txt{} &*\txt{} &*\txt{} &13\ar@{-}[dl]& *\txt{} & 22 \ar@{-}[dl]& *\txt{} &55 \ar@{-}[dl] \ar@{-}[d] & *\txt{}&70 \ar@{-}[dl]& 73 & *\txt{} &98\ar@{-}[dl]\\
+		*\txt{} &*\txt{} &*\txt{} &7 &*\txt{} &12 &*\txt{} &21 &*\txt{} &41 &67 \ar@{-}[dl]&69 &*\txt{} &*\txt{} &75\\
+		*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &66}
+		
+		
+Remove 13
+
+\hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} & *\txt{} & *\txt{} & *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &34 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                *\txt{} &*\txt{} & *\txt{} &10  \ar@{-}[dll] \ar@{-}[drrrr] &  *\txt{} &   *\txt{} &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &72 \ar@{-}[dl] \ar@{-}[drr] \\
+                *\txt{} &3  \ar@{-}[dl] \ar@{-}[dr]     &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &20   \ar@{-}[dl] \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} &68   \ar@{-}[dl] \ar@{-}[dr] &  *\txt{} &*\txt{} & 74  \ar@{-}[dl] \ar@{-}[dr] \\
+		2 &  *\txt{} &4 \ar@{-}[dr] & *\txt{} &*\txt{} &*\txt{} &12& *\txt{} & 22 \ar@{-}[dl]& *\txt{} &55 \ar@{-}[dl] \ar@{-}[d] & *\txt{}&70 \ar@{-}[dl]& 73 & *\txt{} &98\ar@{-}[dl]\\
+		*\txt{} &*\txt{} &*\txt{} &7 &*\txt{} &*\txt{}  &*\txt{} &21 &*\txt{} &41 &67 \ar@{-}[dl]&69 &*\txt{} &*\txt{} &75\\
+		*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &66}
+		
+Remove 20
+
+\hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} & *\txt{} & *\txt{} & *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &34 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                *\txt{} &*\txt{} & *\txt{} &10  \ar@{-}[dll] \ar@{-}[drrrr] &  *\txt{} &   *\txt{} &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &72 \ar@{-}[dl] \ar@{-}[drr] \\
+                *\txt{} &3  \ar@{-}[dl] \ar@{-}[dr]     &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &21   \ar@{-}[dl] \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} &68   \ar@{-}[dl] \ar@{-}[dr] &  *\txt{} &*\txt{} & 74  \ar@{-}[dl] \ar@{-}[dr] \\
+		2 &  *\txt{} &4 \ar@{-}[dr] & *\txt{} &*\txt{} &*\txt{} &12& *\txt{} & 22 & *\txt{} &55 \ar@{-}[dl] \ar@{-}[d] & *\txt{}&70 \ar@{-}[dl]& 73 & *\txt{} &98\ar@{-}[dl]\\
+		*\txt{} &*\txt{} &*\txt{} &7 &*\txt{} &*\txt{}  &*\txt{} &*\txt{}  &*\txt{} &41 &67 \ar@{-}[dl]&69 &*\txt{} &*\txt{} &75\\
+		*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &66}
+
+Remove 2
+
+\hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} & *\txt{} & *\txt{} & *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &68 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                *\txt{} &*\txt{} &*\txt{} & *\txt{} &34  \ar@{-}[dll] \ar@{-}[drrrr] &  *\txt{} &   *\txt{} &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &72 \ar@{-}[dl] \ar@{-}[drr] \\
+                *\txt{} &*\txt{} &10  \ar@{-}[dl] \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &55   \ar@{-}[dl] \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} &70   \ar@{-}[dl] &  *\txt{} &*\txt{} & 74  \ar@{-}[dl] \ar@{-}[dr] \\
+		*\txt{} &4\ar@{-}[dl]\ar@{-}[dr]&  *\txt{} &21 \ar@{-}[d] \ar@{-}[dr] & *\txt{} &*\txt{} &*\txt{} &41& *\txt{} & 67 \ar@{-}[dl]& *\txt{} &69& *\txt{}& *\txt{} & 73 & *\txt{} &98\ar@{-}[dl]\\
+		3 &*\txt{} &7&12&22 &*\txt{}   &*\txt{}  &*\txt{}&66&*\txt{} &*\txt{} &*\txt{} & *\txt{}&*\txt{} &*\txt{} &75}
+		
+		
+
+\item Show the results of accessing the keys 3, 9, 1, 5 in order in the following splay tree. Like the previous problem, show the tree after each access. For each rotation, clearly indicate its type, location in the tree, and direction(s) of rotation. 
+
+ 
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &10 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                					*\txt{} &*\txt{} & *\txt{} &4  \ar@{-}[dll] \ar@{-}[drrrr] &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{}  &*\txt{} &11 \ar@{-}[dr] \\
+                					*\txt{} &2  \ar@{-}[dl]\ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &6  \ar@{-}[dl] \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{}  &  *\txt{} 	&*\txt{} & 12  \ar@{-}[dr] \\
+						1 &  *\txt{} & 3 & *\txt{} &*\txt{} 	&*\txt{} &5 & *\txt{} & 8 \ar@{-}[dl] \ar@{-}[dr] & *\txt{} & *\txt{} & *\txt{}& *\txt{}& *\txt{} &13\\
+						*\txt{} &*\txt{} &*\txt{} 	&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} &7 & *\txt{} & 9}
+						
+Solution:
+
+Find 3
+
+zig-zag (left-right)
+ 
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &10 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                					*\txt{} &*\txt{} & *\txt{} &3  \ar@{-}[dll] \ar@{-}[drrrr] &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{}  &*\txt{} &11 \ar@{-}[dr] \\
+                					*\txt{} &2 \ar@{-}[dl]&  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &4 \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{}  &  *\txt{} 	&*\txt{} & 12  \ar@{-}[dr] \\
+						1&*\txt{}  &*\txt{}  & *\txt{} &*\txt{} 	&*\txt{} &*\txt{}  & *\txt{} & 6 \ar@{-}[dl] \ar@{-}[dr] & *\txt{} & *\txt{} & *\txt{}& *\txt{}& *\txt{} &13\\
+						*\txt{} &*\txt{} &*\txt{} 	&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} &5 & *\txt{} & 8 \ar@{-}[dl] \ar@{-}[dr]*\txt{} \\
+						*\txt{} &*\txt{} &*\txt{} 	&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} &*\txt{}  & 7& *\txt{}& 9}
+						
+zig (right)
+						
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &3 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                					*\txt{} & *\txt{} &2  \ar@{-}[dll] &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{}  &*\txt{} &10  \ar@{-}[dlll]\ar@{-}[dr] \\
+                					1 &*\txt{}  &  *\txt{}&  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &4 \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} & 11  \ar@{-}[dr] \\
+						*\txt{}  &  *\txt{}&*\txt{}  &*\txt{}  & *\txt{} &*\txt{} 	&*\txt{} &*\txt{}  & *\txt{} & 6 \ar@{-}[dl] \ar@{-}[dr] &  *\txt{}& *\txt{}& *\txt{} &12 \ar@{-}[dr]\\
+						*\txt{}  &  *\txt{}&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} &5 & *\txt{} & 8 \ar@{-}[dl] \ar@{-}[dr]*\txt{} &*\txt{} &*\txt{} &*\txt{} &13\\
+						*\txt{}  &  *\txt{}&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} &*\txt{}  & 7& *\txt{}& 9}
+
+
+Find 9
+
+zig-zig (left-left)
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &3 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                					*\txt{} & *\txt{} &2  \ar@{-}[dll] &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{}  &*\txt{} &10  \ar@{-}[dlll]\ar@{-}[dr] \\
+                					1 &*\txt{}  &  *\txt{}&  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &4 \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} & 11  \ar@{-}[dr] \\
+						*\txt{}  &  *\txt{}&*\txt{}  &*\txt{}  & *\txt{} &*\txt{} 	&*\txt{} &*\txt{}  & *\txt{} & 9 \ar@{-}[dl] &  *\txt{}& *\txt{}& *\txt{} &12 \ar@{-}[dr]\\
+						*\txt{}  &  *\txt{}&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} &8  \ar@{-}[dl] & *\txt{} &  *\txt{}  &*\txt{} &*\txt{} &*\txt{}  &13\\
+						*\txt{}  &  *\txt{}&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} 	&*\txt{} &6\ar@{-}[dl]\ar@{-}[dr] &*\txt{}  &  *\txt{} & *\txt{}&  *\txt{} \\
+						*\txt{}  &  *\txt{}&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} 	&5 &*\txt{}  &7 &  *\txt{} & *\txt{}&  *\txt{} }
+
+zig-zag (left-right)
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &3 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                					*\txt{} & *\txt{} &2  \ar@{-}[dll] &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{}  &*\txt{} &9  \ar@{-}[dlll]\ar@{-}[dr] \\
+                					1 &*\txt{}  &  *\txt{}&  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &4 \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} & 10  \ar@{-}[dr] \\
+						*\txt{}  &  *\txt{}&*\txt{}  &*\txt{}  & *\txt{} &*\txt{} 	&*\txt{} &*\txt{}  & *\txt{} & 8 \ar@{-}[dl] &  *\txt{}& *\txt{}& *\txt{} &11 \ar@{-}[dr]\\
+						*\txt{}  &  *\txt{}&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} &6  \ar@{-}[dl]  \ar@{-}[dr] & *\txt{} &  *\txt{}  &*\txt{} &*\txt{} &*\txt{}  &12\ar@{-}[dr]\\
+						*\txt{}  &  *\txt{}&*\txt{} &*\txt{} 	&*\txt{} &*\txt{} 	&*\txt{} &5 &*\txt{}  & 7& *\txt{}&  *\txt{}  *\txt{}& *\txt{}& *\txt{}& *\txt{}&13}
+
+zig (left)
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} &9 \ar@{-}[dlllll] \ar@{-}[drrrr]  \\ 
+                					*\txt{} &*\txt{} & *\txt{} &3  \ar@{-}[dll]  \ar@{-}[drrrr]&*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{}  &*\txt{} &10\ar@{-}[dr] \\
+                					*\txt{} &2 \ar@{-}[dl]&*\txt{}  &  *\txt{}&  *\txt{} & *\txt{} &*\txt{} &4 \ar@{-}[dr]  &  *\txt{} & *\txt{} &*\txt{} &*\txt{} &*\txt{} & 11  \ar@{-}[dr] \\
+						1 &*\txt{}  &  *\txt{}&*\txt{}  &*\txt{}  & *\txt{} &*\txt{} 	&*\txt{} & 8 \ar@{-}[dl] &  *\txt{}& *\txt{}& *\txt{} &*\txt{}  & *\txt{} & 12 \ar@{-}[dr]\\
+						*\txt{} &*\txt{}  &  *\txt{}&*\txt{} &*\txt{} &*\txt{} &*\txt{} 	&6  \ar@{-}[dl]  \ar@{-}[dr] & *\txt{} &  *\txt{}  &*\txt{} &*\txt{} &*\txt{}  &*\txt{} &*\txt{} &13\\
+						*\txt{} &*\txt{}  &  *\txt{}&*\txt{} &*\txt{} &*\txt{} &5 &*\txt{}  & 7& *\txt{}&  *\txt{}  *\txt{}& *\txt{}& *\txt{}& *\txt{}}
+
+Find 1
+
+zig-zig (left-left)
+
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&9\ar@{-}[dlllll] \ar@{-}[drrr] \\
+ 						   1\ar@{-}[dr]&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&10\ar@{-}[dr] \\
+						   *\txt{}&2\ar@{-}[dr]&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&11 \ar@{-}[dr] \\
+						   *\txt{}&*\txt{}&3\ar@{-}[dr]&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&12 \ar@{-}[dr]\\
+						   *\txt{}&*\txt{}&*\txt{}&4\ar@{-}[dr]&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&13\\
+						   *\txt{}&*\txt{}&*\txt{}&*\txt{}&8\ar@{-}[dl]\\
+						   *\txt{}&*\txt{}&*\txt{}&6\ar@{-}[dl] \ar@{-}[dr]\\
+						   *\txt{}&*\txt{}&5 &*\txt{}&7}
+
+zig (left)
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{}&*\txt{}&1\ar@{-}[drrr] \\
+ 					            *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&9\ar@{-}[dl] \ar@{-}[drrr] \\
+ 						   *\txt{}&*\txt{}&*\txt{}&*\txt{}&2\ar@{-}[dr]&*\txt{}&*\txt{}&*\txt{}&10\ar@{-}[dr] \\
+						   *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&3\ar@{-}[dr]&*\txt{}&*\txt{}&*\txt{}&11 \ar@{-}[dr] \\
+						   *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&4\ar@{-}[dr]&*\txt{}&*\txt{}&*\txt{}&12 \ar@{-}[dr]\\
+						   *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&8\ar@{-}[dl]&*\txt{}&*\txt{}&*\txt{}&13\\
+						   *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&6\ar@{-}[dl] \ar@{-}[dr]\\
+						   *\txt{}&*\txt{}&*\txt{}&*\txt{}& *\txt{}&5&*\txt{}&7}
+
+
+Find 5
+
+zig-zig (left-left)
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {1\ar@{-}[drrr]\\
+ 						    *\txt{}&*\txt{}&*\txt{}&9\ar@{-}[dl] \ar@{-}[dr] \\
+						    *\txt{}&*\txt{}&2\ar@{-}[dr] &*\txt{}&10\ar@{-}[dr] \\
+						    *\txt{}&*\txt{}&*\txt{}&3\ar@{-}[dr]&*\txt{}&11\ar@{-}[dr]\\
+						     *\txt{}&*\txt{}&*\txt{}&*\txt{}&4\ar@{-}[dr]&*\txt{}&12\ar@{-}[dr]\\
+						      *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&5\ar@{-}[dr]&*\txt{}&13\\
+						       *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&6\ar@{-}[dr]\\
+						       *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&8\ar@{-}[dl]\\
+						       *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&7}
+
+
+zig-zig (left-left)
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {1\ar@{-}[drrr]\\
+ 						    *\txt{}&*\txt{}&*\txt{}&9\ar@{-}[dl] \ar@{-}[dr] \\
+						    *\txt{}&*\txt{}&2\ar@{-}[dr] &*\txt{}&10\ar@{-}[dr] \\
+						    *\txt{}&*\txt{}&*\txt{}&5\ar@{-}[dl]\ar@{-}[dr]&*\txt{}&11\ar@{-}[dr]\\
+						     *\txt{}&*\txt{}&4\ar@{-}[dl]&*\txt{}&6\ar@{-}[dr]&*\txt{}&12\ar@{-}[dr]\\
+						      *\txt{}&3&*\txt{}&*\txt{}&*\txt{}&8\ar@{-}[dl]&*\txt{}&13\\
+						       *\txt{}&*\txt{}&*\txt{}&*\txt{}&7}
+
+
+zig-zag (left-right)
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {1\ar@{-}[drrr]\\
+                 				    *\txt{}&*\txt{}&*\txt{}&5\ar@{-}[dl]\ar@{-}[drrr]\\
+ 						    *\txt{}&*\txt{}&2\ar@{-}[dr] &*\txt{}&*\txt{}&*\txt{}&9\ar@{-}[dl] \ar@{-}[dr] \\
+						    *\txt{}&*\txt{}&*\txt{}&4\ar@{-}[dl] &*\txt{}&6\ar@{-}[dr]&*\txt{}&10\ar@{-}[dr] \\
+						    *\txt{}&*\txt{}&3&*\txt{}&*\txt{}&*\txt{}&8\ar@{-}[dl]&*\txt{}&11\ar@{-}[dr]\\
+						     *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&7&*\txt{}&*\txt{}&*\txt{}&12\ar@{-}[dr]\\
+						     *\txt{}& *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&13}
+
+zig (left)
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {
+                 				    *\txt{}&*\txt{}&*\txt{}&5\ar@{-}[dl]\ar@{-}[drrr]\\
+ 						    *\txt{}&*\txt{}&1\ar@{-}[dr] &*\txt{}&*\txt{}&*\txt{}&9\ar@{-}[dl] \ar@{-}[dr] \\
+						    *\txt{}&*\txt{}&*\txt{}&2\ar@{-}[dr] &*\txt{}&6\ar@{-}[dr]&*\txt{}&10\ar@{-}[dr] \\
+						    *\txt{}&*\txt{}&*\txt{}&*\txt{}&4\ar@{-}[dl]&*\txt{}&8\ar@{-}[dl]&*\txt{}&11\ar@{-}[dr]\\
+						     *\txt{}&*\txt{}&*\txt{}&3&*\txt{}&7&*\txt{}&*\txt{}&*\txt{}&12\ar@{-}[dr]\\
+						     *\txt{}& *\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&*\txt{}&13}
+
+
+
+
+
+
+
+
+\end{enumerate}
+\end{document}
+

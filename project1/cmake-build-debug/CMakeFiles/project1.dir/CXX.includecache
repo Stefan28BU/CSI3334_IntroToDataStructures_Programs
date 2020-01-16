@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project1/containerInterface.h
+
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project1/main.cpp
+iostream
+-
+string
+-
+myStack.h
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project1/myStack.h
+cassert
+-
+sstream
+-
+
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project1/myStack.h
+myVector.h
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project1/myVector.h
+
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project1/myVector.h
+iostream
+-
+containerInterface.h
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project1/containerInterface.h
+

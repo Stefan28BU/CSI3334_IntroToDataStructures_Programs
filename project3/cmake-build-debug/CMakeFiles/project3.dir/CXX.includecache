@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project3/containerInterface.h
+
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project3/main.cpp
+iostream
+-
+myList.h
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project3/myList.h
+
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project3/myList.h
+memory
+-
+iostream
+-
+containerInterface.h
+/Users/Stefan_Xu/Desktop/Stefan/CSI3334/project3/containerInterface.h
+

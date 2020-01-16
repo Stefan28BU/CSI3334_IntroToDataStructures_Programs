@@ -1,0 +1,434 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in}
+\usepackage{nopageno}
+\pagestyle{empty}
+\usepackage{color}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+\usepackage[none]{hyphenat}
+\usepackage{array}
+\setlength\extrarowheight{3pt} 
+
+% Header, put stuff that impacts the whole document here
+\NeedsTeXFormat{LaTeX2e}
+\title{CSI 3334 Data Structures\\Homework 4}
+
+
+\author{Yufan Xu} 
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\maketitle 
+
+
+
+Do your own work for this assignment; do not work with others. Consult the book
+and your professor for help if you need it. Do not use any other resources.  
+Use good grammar, correct spelling, and complete sentences.
+
+
+\begin{enumerate}
+
+
+\item \label{itm:hashing} (10 points) Given input \{4371, 1323, 6173, 4199, 4344, 9679, 1989\} and a hash function $h(x) = x\%10$ show the resulting:
+	\begin{enumerate}
+%	    	\item hash table using linear probing
+%		\item hash table using quadratic probing
+		\item hash table with a second hash function $h_2(x) = 7-(x\%7)$
+%		\item separate chaining hash table
+	\end{enumerate}
+
+Insert the inputs in the given order. If any insertion fails, indicate that (but do not resize the table). The hash table size is implied by the hash function. 
+
+
+\small{
+
+	\begin{tabular}{| p{10mm}  | p{20mm} |p{20mm} |p{20mm} |p{60mm}|}
+	\hline
+		Index & Linear Probing &Quadratic Probing & Double Hashing & Separate Chaining\\ \hline
+		0 & 9679 & 9679 & & $-->$\\ \hline
+		1 & 4371 & 4371 & 4371 &$-->$4371\\ \hline		
+		2 & 1989 & & &$-->$ \\ \hline
+		3 & 1323 & 1323 & 1323 &$-->$1323$-->$6173\\ \hline
+		4 & 6173 & 6173 & 6173 &$-->$4344\\ \hline
+		5 & 4344 & 4344 & 9679 &$-->$ \\ \hline 
+		6 & & & & $-->$\\ \hline
+		7 & & & 4344& $-->$ \\ \hline
+		8 & & 1989 & & $-->$ \\ \hline
+		9 & 4199 & 4199 & 4199 &$-->$4199$-->$9679$-->$1989\\ \hline
+	\end{tabular}
+}
+
+Failed Insertion (1 failed):
+
+The number 1989 failed to be inserted using Double Hashing, by using $h_2$ function after the first collision occurs, it hashes to 6 which makes the probing enters a infinite loop because it collides with every single element in the cell.
+
+
+\newpage
+\item(10 points)  Show the result for rehashing each of the four hash tables in problem \ref{itm:hashing}. The new hash table size should be a prime number at least as large as twice the original size, and the primary hash function should change to reflect the new table size. 
+
+Solution:
+
+Since the original table size is 10, I decided to use the prime number 23 as the new table size
+
+So the new hashing function becomes $h(x) = x\%23$
+
+The new hashing table for liner probing method is:
+
+\small{
+
+	\begin{tabular}{| p{10mm}  | p{20mm} |}
+	\hline
+		Index & Linear Probing\\ \hline
+		0 & \\ \hline
+		1 & 4371 \\ \hline		
+		2 & \\ \hline
+		3 & \\ \hline
+		4 & \\ \hline
+		5 & \\ \hline 
+		6 & \\ \hline
+		7 & \\ \hline
+		8 & \\ \hline
+		9 & 6173\\ \hline
+		10 & \\ \hline
+		11 & 1989 \\ \hline
+		12 & 1323 \\ \hline
+		13 & 4199 \\ \hline
+		14 & \\ \hline
+		15 & \\ \hline
+		16 & \\ \hline
+		17 & \\ \hline
+		18 & \\ \hline
+		19 & 9679\\ \hline
+		20 & 4344 \\ \hline
+		21 & \\ \hline
+		22 & \\ \hline
+	\end{tabular}
+}
+
+The new hashing table for quadratic probing method is:
+
+\small{
+
+	\begin{tabular}{| p{10mm}  | p{20mm} |}
+	\hline
+		Index & Quadratic Probing\\ \hline
+		0 & \\ \hline
+		1 & 4371 \\ \hline		
+		2 & \\ \hline
+		3 & \\ \hline
+		4 & \\ \hline
+		5 & \\ \hline 
+		6 & \\ \hline
+		7 & \\ \hline
+		8 & \\ \hline
+		9 & 6173\\ \hline
+		10 & \\ \hline
+		11 & 1989 \\ \hline
+		12 & 1323 \\ \hline
+		13 & 4199 \\ \hline
+		14 & \\ \hline
+		15 & \\ \hline
+		16 & \\ \hline
+		17 & \\ \hline
+		18 & \\ \hline
+		19 & 9679\\ \hline
+		20 & 4344 \\ \hline
+		21 & \\ \hline
+		22 & \\ \hline
+	\end{tabular}
+}
+
+The new hashing table for double hashing method is:
+
+\small{
+
+	\begin{tabular}{| p{10mm}  | p{20mm} |}
+	\hline
+		Index & Double Hashing\\ \hline
+		0 & \\ \hline
+		1 & 4371 \\ \hline		
+		2 & \\ \hline
+		3 & \\ \hline
+		4 & \\ \hline
+		5 & \\ \hline 
+		6 & \\ \hline
+		7 & \\ \hline
+		8 & \\ \hline
+		9 & 6173\\ \hline
+		10 & \\ \hline
+		11 & 1989 \\ \hline
+		12 & 1323 \\ \hline
+		13 & 4199 \\ \hline
+		14 & \\ \hline
+		15 & \\ \hline
+		16 & \\ \hline
+		17 & \\ \hline
+		18 & \\ \hline
+		19 & 9679\\ \hline
+		20 & 4344 \\ \hline
+		21 & \\ \hline
+		22 & \\ \hline
+	\end{tabular}
+}
+
+The new hashing table for separate chaining method is:
+
+\small{
+
+	\begin{tabular}{| p{10mm}  | p{40mm} |}
+	\hline
+		Index & Separate Chaining\\ \hline
+		0 &$-->$ \\ \hline
+		1 & $-->$4371 \\ \hline		
+		2 & $-->$\\ \hline
+		3 & $-->$\\ \hline
+		4 & $-->$\\ \hline
+		5 & $-->$\\ \hline 
+		6 & $-->$\\ \hline
+		7 & $-->$\\ \hline
+		8 & $-->$\\ \hline
+		9 & $-->$6173\\ \hline
+		10 & $-->$\\ \hline
+		11 & $-->$1989 \\ \hline
+		12 & $-->$1323 \\ \hline
+		13 & $-->$4199 \\ \hline
+		14 & $-->$\\ \hline
+		15 & $-->$\\ \hline
+		16 & $-->$\\ \hline
+		17 & $-->$\\ \hline
+		18 & $-->$\\ \hline
+		19 & $-->$ 9679\\ \hline
+		20 & $-->$4344 \\ \hline
+		21 & $-->$\\ \hline
+		22 & $-->$\\ \hline
+	\end{tabular}
+}
+
+
+
+
+\newpage
+\item Construct a Leftist Heap using the following input data: \\ \hspace{2cm} 9, 11, 36, 44, 27, 30, 37, 16, 35, 24, 41, 10, 5, 45
+
+Solution:
+
+$H$ stands for $Heap$
+
+Insert 9 to $H_1$, insert 11 to $H_2$, merging $H_2$ to $H_1$:
+
+$H_1$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {9}
+ 
+ $H_2$:
+ 
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {11}
+ 
+ $H_1$ after merging: 
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &9  \ar@{-}[dr]\\
+ 						    *\txt{} &*\txt{} &11}
+
+9 becomes the $\alpha$ node, swap:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &9  \ar@{-}[dl]\\
+ 						    11&*\txt{} &*\txt{}}
+					    
+Insert 36 to $H_3$, insert 44 to $H_4$, merging  $H_3$, $H_4$ to $H_1$:	
+
+$H_3$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {36}
+ 
+ $H_4$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {44}	
+ 
+ $H_1$ after merging: 			    
+						    
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &9  \ar@{-}[dl]\ar@{-}[dr]\\
+ 						    11&*\txt{} &36\ar@{-}[dr]\\
+						    *\txt{} &*\txt{} &*\txt{} &44}					    
+						    
+36 becomes the $\alpha$ node, swap:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &9  \ar@{-}[dl]\ar@{-}[drrr]\\
+ 						    11&*\txt{} &*\txt{} &*\txt{} &36\ar@{-}[dl]\\
+						    *\txt{} &*\txt{} &*\txt{} &44}							    
+						    
+Insert 27 to $H_5$, insert 30 to $H_6$, merging  $H_5$, $H_6$ to $H_1$:	
+
+$H_5$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {27}
+ 
+ $H_6$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {30}
+ 
+  $H_1$ after merging: 	
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &9  \ar@{-}[dl]\ar@{-}[drrr]\\
+ 						    11&*\txt{} &*\txt{} &*\txt{} &27\ar@{-}[dl]\ar@{-}[dr]\\
+						    *\txt{} &*\txt{} &*\txt{} &36\ar@{-}[dl]&*\txt{} &30\\
+						    *\txt{} &*\txt{} &44}	
+
+9 becomes the $\alpha$ node, swap:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &9  \ar@{-}[dlll]\ar@{-}[dr]\\
+ 						    *\txt{} &*\txt{} &27\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{}&*\txt{} &11\\
+						    *\txt{} &36\ar@{-}[dl]&*\txt{} &30\\
+						    44}	
+
+Insert 37 to $H_7$, insert 16 to $H_8$, insert 35 to $H_9$, merging  $H_7$, $H_8$, $H_9$ to $H_1$:	
+
+ $H_7$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {37}
+ 
+  $H_8$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {16}
+ 
+  $H_9$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {35}
+ 
+   $H_1$ after merging: 
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &9  \ar@{-}[dlll]\ar@{-}[drrr]\\
+ 						    *\txt{} &*\txt{} &27\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{}&*\txt{} &*\txt{} &*\txt{} &11 \ar@{-}[dl]\ar@{-}[dr]\\
+						    *\txt{} &36\ar@{-}[dl]&*\txt{} &30 &*\txt{} &*\txt{} &*\txt{} &37&*\txt{} &16\ar@{-}[dr]\\
+						    44&*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &35}	
+
+16 becomes the $\alpha$ node, swap:
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &9  \ar@{-}[dlll]\ar@{-}[drrr]\\
+ 						    *\txt{} &*\txt{} &27\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{}&*\txt{} &*\txt{} &*\txt{} &11 \ar@{-}[dl]\ar@{-}[drr]\\
+						    *\txt{} &36\ar@{-}[dl]&*\txt{} &30 &*\txt{} &*\txt{} &*\txt{} &37&*\txt{} &*\txt{} &16\ar@{-}[dl]\\
+						    44&*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &35}	
+
+Insert 24 to $H_{10}$, merging $H_{10}$ to $H_1$:	
+
+  $H_{10}$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {24}
+ 
+   $H_1$ after merging: 
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &9  \ar@{-}[dlll]\ar@{-}[drrr]\\
+ 						    *\txt{} &*\txt{} &27\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{}&*\txt{} &*\txt{} &*\txt{} &11 \ar@{-}[dl]\ar@{-}[drr]\\
+						    *\txt{} &36\ar@{-}[dl]&*\txt{} &30 &*\txt{} &*\txt{} &*\txt{} &37&*\txt{} &*\txt{} &16\ar@{-}[dl]\ar@{-}[dr]\\
+						    44&*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &35&*\txt{} &24}
+
+11 becomes the $\alpha$ node, swap:
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &9  \ar@{-}[dlll]\ar@{-}[drrr]\\
+ 						    *\txt{} &*\txt{} &27\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{}&*\txt{} &*\txt{} &*\txt{} &11 \ar@{-}[dl]\ar@{-}[drr]\\
+						    *\txt{} &36\ar@{-}[dl]&*\txt{} &30 &*\txt{} &*\txt{} &*\txt{} &16\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{} &37\\
+						    44&*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &35&*\txt{} &24}
+
+Insert 41 to $H_{11}$, merging $H_{11}$ to $H_1$:	
+
+  $H_{11}$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {41}
+ 
+   $H_1$ after merging: 
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &9  \ar@{-}[dlll]\ar@{-}[drrr]\\
+ 						    *\txt{} &*\txt{} &27\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{}&*\txt{} &*\txt{} &*\txt{} &11 \ar@{-}[dl]\ar@{-}[drr]\\
+						    *\txt{} &36\ar@{-}[dl]&*\txt{} &30 &*\txt{} &*\txt{} &*\txt{} &16\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{} &37\ar@{-}[dr]\\
+						    44&*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &35&*\txt{} &24&*\txt{} &*\txt{} &41}
+
+37 becomes the $\alpha$ node, swap:
+
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &9  \ar@{-}[dlll]\ar@{-}[drrrr]\\
+ 						    *\txt{} &*\txt{} &27\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{}&*\txt{} &*\txt{} &*\txt{} &*\txt{} &11 \ar@{-}[dll]\ar@{-}[drr]\\
+						    *\txt{} &36\ar@{-}[dl]&*\txt{} &30 &*\txt{} &*\txt{} &*\txt{} &16\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{} &*\txt{} &37\ar@{-}[dl]\\
+						    44&*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &35&*\txt{} &24&*\txt{} &41}
+
+Insert 10 to $H_{12}$, insert 5 to $H_{13}$, insert 45 to $H_{14}$,   merging $H_{12}$, $H_{13}$, $H_{14}$ to $H_1$:	
+
+ $H_{12}$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {10}
+ 
+  $H_{13}$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {5}
+ 
+  $H_{14}$:
+
+  \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {45}
+
+  $H_1$ after merging: 
+  
+ \hspace{10 mm}
+\entrymodifiers={++[o][F-]}
+ \xymatrix @R=0.5pc @C=0.5pc {*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &5\ar@{-}[dllllllll]\ar@{-}[dr]\\
+ 						    *\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &9  \ar@{-}[dlll]\ar@{-}[drrrrrrr]*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &45\\
+ 						    *\txt{} &*\txt{} &27\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{}&*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &10 \ar@{-}[dlll]\\
+						    *\txt{} &36\ar@{-}[dl]&*\txt{} &30 &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &11\ar@{-}[dll]\ar@{-}[drr]\\
+						    44&*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &16\ar@{-}[dl]\ar@{-}[dr]&*\txt{} &*\txt{} &*\txt{} &37\ar@{-}[dl]\\
+						    *\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &*\txt{} &35 &*\txt{} &24&*\txt{} &41}
+
+\end{enumerate}
+\end{document}
+
